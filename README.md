@@ -48,7 +48,7 @@ After:
 Claude Code:
 
 ```bash
-mkdir -p ~/.claude/skills && cp -r skills/i-am-lazy ~/.claude/skills/
+git clone https://github.com/spa77k/i-am-lazy.git && mkdir -p ~/.claude/skills && cp -r i-am-lazy/skills/i-am-lazy ~/.claude/skills/
 ```
 
 ## License
