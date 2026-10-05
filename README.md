@@ -1,5 +1,7 @@
 # i-am-lazy
 
+English | [日本語](README.ja.md)
+
 An agent skill for people with zero energy. The AI looks, does, and verifies by itself. You get one tiny action at the end, at most.
 
 Built from real Claude Code history (30 projects, ~1,900 messages from a terse, voice-dictating Japanese user). Every moment the user snapped at the AI was collected and turned into a rule so it never happens again.
