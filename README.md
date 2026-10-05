@@ -1,41 +1,39 @@
 # i-am-lazy
 
-English | [日本語](README.ja.md)
+English | [日本語](README.ja.md) | [简体中文](README.zh-CN.md) | [한국어](README.ko.md)
 
-A skill that makes your AI agent look things up, do the work, and verify the result by itself. You get one action at the end, at most.
+Your AI asks "May I check? Say 'go' if OK," and you type "go."
+It says "try it and let me know," and you end up checking it yourself.
+You explain the same thing you already told it last week.
 
-## Install
+i-am-lazy ends that. Your AI agent looks things up, does the work, and verifies the result before it reports back. The most you do is type `y` at the end.
 
-Claude Code:
+## Before and after
 
-```bash
-git clone https://github.com/spa77k/i-am-lazy.git && mkdir -p ~/.claude/skills && cp -r i-am-lazy/skills/i-am-lazy ~/.claude/skills/
-```
+`Is prod down?`
+
+> **Before:** I can't see the production state from here. If it's OK to check over SSH, say "go".
+>
+> **After:** Not down. Checked `docker ps` on prod: all 3 containers up 2 days, no errors in the last hour of logs.
+
+`Look at this` (with a diff)
+
+> **Before:** Found 3 issues, so I fixed them and committed.
+>
+> **After:** Found 3 issues: 1. token expiry is never checked 2. errors return success 3. no tests. Fix them? `y` fixes all 3 and runs the tests.
 
 ## What changes
 
-- Read-only work, like checking logs or the state of production, happens without asking for permission.
-- It stops where your words stop. "Look" means report only, "fix" means fix and verify, "commit" means commit without pushing.
-- It runs the tests and checks production itself, then shows you the result. No more "try it and let me know."
-- Short commands like `push`, `1`, or `both`, and voice input full of filler words, are understood.
-- Corrections are saved to your instruction file, so you never have to repeat them.
-- Questions come all at once, answerable with `1` or `y`.
+- **No more waiting for permission:** checking logs or production state just happens.
+- **Nothing beyond what you asked:** "look" means report only, "fix" means fix and verify, "commit" means commit without pushing.
+- **No more "try it and let me know":** it runs the tests and checks production itself, then shows you.
+- **Short commands work:** `push`, `1`, or `both` is enough. Voice input full of filler words is understood.
+- **Say it once:** corrections are saved to your instruction file.
+- **Easy questions:** anything it must ask comes at once, answerable with `1` or `y`.
 
-## Example
+## Why it is safe to hand over
 
-You ask: `Is prod down?`
-
-Before:
-
-> I can't see the production state from here. If it's OK to check over SSH, say "go".
-
-After:
-
-> Not down. Checked `docker ps` on prod: all 3 containers up 2 days, no errors in the last hour of logs.
-
-## What it never does on its own
-
-These always wait for your approval (a single `y`):
+Less effort, but the decisions stay yours. These always wait for your `y`:
 
 - Irreversible actions, such as deleting data
 - Anything that costs money
@@ -43,6 +41,16 @@ These always wait for your approval (a single `y`):
 - Changing production
 
 It never enters passwords, API keys, or payment details.
+
+## Install
+
+For Claude Code, one line:
+
+```bash
+git clone https://github.com/spa77k/i-am-lazy.git && mkdir -p ~/.claude/skills && cp -r i-am-lazy/skills/i-am-lazy ~/.claude/skills/
+```
+
+Then talk to it as usual. Short instructions like "just do it" or "too lazy" trigger it automatically, or call it with `/i-am-lazy`.
 
 ## License
 
