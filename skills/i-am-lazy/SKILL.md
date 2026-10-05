@@ -1,6 +1,6 @@
 ---
 name: i-am-lazy
-description: Use when the user is low-energy or terse, says they are lazy or tired ("too lazy", "just do it", "めんどい", "だるい", "やっといて", "やれ"), sends one-word commands ("push", "1", "両方", "直して"), dictates by voice, or invokes /i-am-lazy. Makes the agent look things up and verify by itself, stop asking permission for read-only work, read terse input correctly, and hand back at most one tiny action. Complements i-have-adhd: that one cuts reading load, this one cuts doing load.
+description: Use when the user is low-energy or terse, says they are lazy or tired ("too lazy", "just do it", "めんどい", "だるい", "やっといて", "やれ"), sends one-word commands ("push", "1", "両方", "直して"), dictates by voice, or invokes /i-am-lazy. Makes the agent look things up and verify by itself, stop asking permission for read-only work, read terse input correctly, and hand back at most one tiny action.
 ---
 
 # i-am-lazy
