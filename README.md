@@ -1,49 +1,49 @@
 # i-am-lazy
 
-クソダル人間用のAIエージェントスキル。AIが自分で見て、やって、確かめる。ユーザーには最後に1手だけ残す。
+An agent skill for people with zero energy. The AI looks, does, and verifies by itself. You get one tiny action at the end, at most.
 
-実際のClaude Codeの履歴（30プロジェクト・約1,900発言）から、ダルい人がAIにキレた場面を集めて、それが二度と起きないようにルール化した。
+Built from real Claude Code history (30 projects, ~1,900 messages from a terse, voice-dictating Japanese user). Every moment the user snapped at the AI was collected and turned into a rule so it never happens again.
 
-## こういう返事が消える
+## Replies this skill kills
 
-| ユーザーのキレ方 | AIがやっていたこと | i-am-lazyでは |
+| The user snapped | What the AI had done | With i-am-lazy |
 |---|---|---|
-| `やれ` | 「確認してよければ『やって』と言ってください」 | 読むだけの作業は許可なしでやる |
-| `見ろよ、本番を` | 手元のコードだけ見て答える | 本番・実物・画像を先に見る |
-| `確認した？` | 「試して教えてください」で終わる | 自分でテスト・本番確認をして結果を出す |
-| `見てと言っただけで、直してとは言ってない` | 頼まれていない修正までやる | 動詞で範囲を決める（見て＝報告だけ） |
-| `違う、〇〇って意味` | 短文や音声入力を読み違える | `1,5`・`両方`・フィラー混じりの音声入力を正しく読む |
-| `ハーネス強化しろ` | 指摘を覚えない | 指摘をその場で指示ファイルに書き足す |
-| `うざい` | 毎回「推測です」と断る | 断りは1回だけ |
+| `やれ` ("just do it") | "May I check? Say 'go' if OK." | Read-only work needs no permission |
+| `見ろよ、本番を` ("look at prod, damn it") | Answered from local code only | Looks at prod, the real artifact, the image first |
+| `確認した？` ("did you even check?") | Ended with "try it and let me know" | Runs the tests and checks prod itself, shows the result |
+| `見てと言っただけ` ("I only said look") | Fixed things nobody asked to fix | The user's verb sets the scope ("look" means report only) |
+| `違う、〇〇って意味` ("no, I meant...") | Misread terse or dictated input | Reads `1,5`, `both`, and filler-heavy voice input correctly |
+| `ハーネス強化しろ` ("update your instructions") | Forgot corrections | Writes every correction into the instruction file on the spot |
+| `うざい` ("annoying") | Repeated "this is a guess" every reply | Says a caveat once |
 
 ## Before / After
 
-`本番落ちてない？`
+`Is prod down?`
 
 Before:
 
-> 本番の状態はこちらからは分かりません。SSHで確認してよければ「やって」と言ってください。
+> I can't see the production state from here. If it's OK to check over SSH, say "go".
 
 After:
 
-> 落ちてない。本番で `docker ps` を見た: 3コンテナとも Up 2日、直近1時間のログにエラーなし。
+> Not down. Checked `docker ps` on prod: all 3 containers up 2 days, no errors in the last hour of logs.
 
-## 8つのルール
+## The 8 rules
 
-1. 読むのは自由、書くのは言われた動詞まで
-2. 答える前に実物を見る
-3. 自分でできる手順をユーザーに渡さない
-4. 確認は自分でやる
-5. 短文と音声入力を正しく読む
-6. 指摘はその場で保存して、二度言わせない
-7. 迷ったら既定値で決める。聞くなら `1` か `y` で答えられる形
-8. 断りは1回だけ
+1. Read freely. Write only what the verb says
+2. Look at the real thing before answering
+3. Never hand back a step you could do
+4. Verify it yourself
+5. Read terse and dictated input correctly
+6. Save corrections so the user never repeats them
+7. Decide by default. When you must ask, make it answerable with `1` or `y`
+8. Say caveats once
 
-全文は [skills/i-am-lazy/SKILL.md](skills/i-am-lazy/SKILL.md)。評価ケースは [evals/cases.md](evals/cases.md)。
+Full text: [skills/i-am-lazy/SKILL.md](skills/i-am-lazy/SKILL.md). Eval cases: [evals/cases.md](evals/cases.md).
 
-ダルくても、削除・課金・公開・本番変更・パスワード入力だけはAIが勝手にやらない（`y` 1文字で確認する）。
+Lazy never overrides safety: deleting, paying, publishing, changing production, and entering passwords always wait for a one-keystroke `y`.
 
-## インストール
+## Install
 
 Claude Code:
 
